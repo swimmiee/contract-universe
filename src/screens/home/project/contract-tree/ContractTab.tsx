@@ -30,12 +30,6 @@ export const ContractTab = ({contract: {id, name, projectId}}:ContractTabProps) 
 
     return (
         <ContractTreeItem nodeId={id} labelText={name}>
-
-            <ContractTreeItem 
-                nodeId={'create-'+id}
-                labelText="new..."
-                onClick={onCreateImpl}
-            />
             <Async promiseFn={loadImplsWithChains}>
                 {({data}) => {
                     if(data) return (
@@ -51,6 +45,11 @@ export const ContractTab = ({contract: {id, name, projectId}}:ContractTabProps) 
                     )
                 }}
             </Async>
+            <ContractTreeItem 
+                nodeId={'create-'+id}
+                labelText="new..."
+                onClick={onCreateImpl}
+            />
         </ContractTreeItem>
     )
 }

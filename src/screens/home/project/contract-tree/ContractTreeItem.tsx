@@ -21,7 +21,7 @@ export const ContractTreeItem = (props: StyledTreeItemProps) => {
     return (
       <ContractTreeItemRoot
         label={
-          <Box sx={{ display: 'flex', alignItems: 'center', p: 0.8, pr: 0 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', p: 0.2, pr: 0 }}>
             <Typography variant="body2" sx={{ fontWeight: 'inherit', flexGrow: 1 }}>
               {labelText}
             </Typography>
