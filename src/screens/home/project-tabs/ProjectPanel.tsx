@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { ContractVerticalTabs } from "./contract-tree";
-import { ImplPanel } from "./impl-panel";
+import { ImplPanel } from "./main-panel";
 
 interface TabPanelProps {
     children?: React.ReactNode;

@@ -6,8 +6,9 @@ export const NoImpl = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            flex={1}
         >
-            컨트랙트를 선택해 주세요.
+            컨트랙트를 선택해 주세요!
         </Box>
     )
 }

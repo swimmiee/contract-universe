@@ -34,7 +34,7 @@ export const ContractTreeItemRoot = styled(TreeItem)(({ theme }) => ({
     [`& .${treeItemClasses.group}`]: {
       marginLeft: 0,
       [`& .${treeItemClasses.content}`]: {
-        paddingLeft: theme.spacing(2),
+        paddingLeft: theme.spacing(1.5),
       },
     },
   }));

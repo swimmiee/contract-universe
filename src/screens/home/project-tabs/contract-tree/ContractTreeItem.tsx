@@ -1,6 +1,5 @@
 import { TreeItemProps } from "@mui/lab";
 import { Box, Typography } from "@mui/material";
-import { useContractState } from "atoms";
 import { ContractTreeItemRoot } from "./ContractTreeItemRoot";
 
 type StyledTreeItemProps = TreeItemProps & {
@@ -20,11 +19,16 @@ export const ContractTreeItem = ({
     return (
       <ContractTreeItemRoot
         label={
-          <Box sx={{ display: 'flex', alignItems: 'center', py: .5 }}>
+          <Box 
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            py={.7}
+          >
             <Typography variant="body2" sx={{ fontWeight: 'inherit', flexGrow: 1 }}>
               {labelText}
             </Typography>
-            <Typography variant="caption" color="inherit">
+            <Typography variant="caption" fontSize={11} color="inherit">
               {labelInfo}
             </Typography>
           </Box>

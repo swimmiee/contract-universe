@@ -1,18 +1,24 @@
-// interface ImplMainProps 
-
-import { Chip, chipClasses, Typography } from "@mui/material";
+import { Chip, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useContractValue } from "atoms";
+import { useContractState } from "atoms";
+import { useState } from "react";
+import { ChangeEventHandler } from "react";
 import { useContext } from "react";
 import { AbiItem } from "web3-utils";
 import { AbiExecuter } from "./AbiExecuter";
 import ImplStore from "./implContext";
-import { SearchFunctions } from "./SearchFunctions";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const isView = (a:AbiItem) => a.stateMutability === "view" || a.stateMutability === "pure"
 export const ImplMain = () => {
-    const { project, impl} = useContractValue()
+    const { impl, setImpl } = useContractState()
     const { contract, abstract, chain }  = useContext(ImplStore)!
+    const [search, setSearch] = useState("")
+    const onChangeSearch:ChangeEventHandler<HTMLInputElement> = (e) => {
+        setSearch(e.target.value)
+    } 
+    const close = () => setImpl(null)
 
     return (
         <Box 
@@ -21,8 +27,15 @@ export const ImplMain = () => {
             flex={1}
             p={1.5}
         >
-
-            <SearchFunctions abiItems={abstract.abi}/>
+            <Box display="flex">
+                <TextField 
+                    label="Search"
+                    value={search}
+                    onChange={onChangeSearch}
+                    sx={{mr: 2, display: 'flex', flex: 1}}
+                />
+                <CloseIcon onClick={close}/>
+            </Box>
 
             <Box 
                 display="flex"
@@ -42,7 +55,7 @@ export const ImplMain = () => {
             </Box>
 
             {abstract.abi
-                .filter(a => a.name && a.type === "function")
+                .filter(a => a.type === "function" && a.name && a.name.includes(search))
                 .sort((a, b) => +isView(b) - +isView(a))
                 .map((a, i)=> (
                 <AbiExecuter 

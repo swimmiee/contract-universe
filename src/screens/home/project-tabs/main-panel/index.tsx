@@ -3,12 +3,13 @@ import { useContractState } from "atoms";
 import { getContractInfoByImpl } from "core/implementations/getContractInfoByImpl";
 import { useCallback } from "react";
 import { Async } from "react-async";
-import ImplStore from "./implContext";
-import { ImplMain } from "./ImplMain";
+import { ContractSetting } from "./contract-setting-panel";
+import ImplStore from "./impl-panel/implContext";
+import { ImplMain } from "./impl-panel";
 import { NoImpl } from "./NoImpl";
 
 export function ImplPanel (){
-    const { impl } = useContractState()
+    const { impl, contract } = useContractState()
     const getInfo = useCallback(async () => {
         if(impl){
             const info = await getContractInfoByImpl(impl)
@@ -26,15 +27,21 @@ export function ImplPanel (){
         >
             <Async promiseFn={getInfo}>
                 {({data, isLoading, error}) => {
-                    if(error) return (
-                        <NoImpl />
-                    )
+                    if(error){
+                        if(contract) return (
+                            <ContractSetting 
+                                contract={contract} 
+                            />
+                        )
+                        else return (
+                            <NoImpl />
+                        )
+                    } 
                     else if(data) return (
                         <ImplStore.Provider value={data}>
                             <ImplMain />
                         </ImplStore.Provider>
                     )
-
                 }}
 
             </Async>

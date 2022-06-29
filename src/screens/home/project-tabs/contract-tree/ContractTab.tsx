@@ -10,7 +10,9 @@ import { ContractTreeItem } from "./ContractTreeItem"
 interface ContractTabProps {
     contract: Contract
 }
-export const ContractTab = ({contract: {id, name, projectId}}:ContractTabProps) => {
+export const ContractTab = ({contract}:ContractTabProps) => {
+    const {id, name, projectId} = contract;
+
     const navigate = useNavigate()
     const onCreateImpl = useCallback(() => navigate(
         generatePath(ROUTES.CREATE_IMPLEMENTATION, {
@@ -28,10 +30,15 @@ export const ContractTab = ({contract: {id, name, projectId}}:ContractTabProps) 
         }
     },[id])
 
-    const { setImpl } = useContractState()
+    const { setContract, setImpl } = useContractState()
+    const selectContract = useCallback(() => setContract(contract),[contract.id])
 
     return (
-        <ContractTreeItem nodeId={id} labelText={name}>
+        <ContractTreeItem 
+            nodeId={id} 
+            labelText={name}
+            onClick={selectContract}
+        >
             <Async promiseFn={loadImplsWithChains}>
                 {({data}) => {
                     if(data) return (

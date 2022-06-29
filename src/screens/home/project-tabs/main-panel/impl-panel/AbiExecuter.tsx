@@ -24,8 +24,10 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
             return formInputs[input.name]
         })
 
-        const result = await contractInstance.methods[name!](...params).call()
-        setResultText(JSON.stringify(result, null, 2))
+        if(stateMutability === "view" || stateMutability === "pure"){
+            const result = await contractInstance.methods[name!](...params).call()
+            setResultText(JSON.stringify(result, null, 2))
+        }
     }
 
     const [resultText, setResultText] = useState("")

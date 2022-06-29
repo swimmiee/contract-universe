@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { ROUTES } from "routes";
 import { NoProject } from "./NoProject";
-import ProjectTabs from "./project/project-tabs";
+import ProjectTabs from "./project-tabs";
 
 
 

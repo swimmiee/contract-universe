@@ -20,6 +20,7 @@ const implState = atom<Impl | null>({
 
 export const useContractState = () => {
     const [project, setProject] = useRecoilState(projectState)
+    const [contract, setContract] = useRecoilState(contractState)
     const [impl, setImpl] = useRecoilState(implState)
 
     // project 변경 시 하위 impl 초기화
@@ -30,6 +31,7 @@ export const useContractState = () => {
 
     return {
         project, setProject,
+        contract, setContract,
         impl, setImpl
     }
 }
