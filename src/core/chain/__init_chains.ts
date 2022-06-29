@@ -10,8 +10,7 @@ export const __init_chains = async (force?: boolean) => {
             return {
                 chains: [
                     CHAINS.klaytn,
-                    CHAINS.ethereum,
-                    CHAINS.baobab,
+                    CHAINS.ethereum
                 ]
             }
         }

@@ -18,8 +18,7 @@ const colors = [
 ]
 
 export function ContractVerticalTabs() {
-
-  const {project, setContract} = useContractState()
+  const { project } = useContractState()
   const loadContracts = async () => {
     if(!project?.id)
       return []
@@ -42,14 +41,13 @@ export function ContractVerticalTabs() {
       defaultExpanded={['3']}
       defaultCollapseIcon={<ArrowDropDownIcon />}
       defaultExpandIcon={<ArrowRightIcon />}
-      // defaultEndIcon={<div style={{ width: 20 }} />}
-      sx={{ height: "100%", flexGrow: 1, maxWidth: 180, overflowY: 'auto' }}
+      sx={{ height: "100%", flexGrow: 1, maxWidth: 160, overflowY: 'auto' }}
     >
       <Async promiseFn={loadContracts}>
         {({data:constracts, isLoading}) => {
           if(isLoading)
             return "Loading..."
-          if(constracts)
+          else if(constracts)
             return (
               constracts.map(a => (
                 <ContractTab 

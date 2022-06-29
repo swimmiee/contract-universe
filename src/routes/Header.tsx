@@ -2,10 +2,11 @@ import { MenuOutlined } from "@mui/icons-material"
 import { Chip, IconButton, Typography, Box } from "@mui/material"
 import { accountState, useContractValue } from "atoms"
 import { useMemo } from "react"
-import { matchPath, useLocation } from "react-router-dom"
+import { matchPath, useLocation, useNavigate } from "react-router-dom"
 import { useRecoilState } from "recoil"
 import { fAddress } from "utils/formatAddress"
 import { ROUTES } from "./route-names"
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 
 const HEADER_HEIGHT = 76;
@@ -18,6 +19,8 @@ const HEADER_ESCAPED_LIST = [
 
 export const Header = () => {
     const { pathname } = useLocation()
+    const navigate = useNavigate()
+    const goBack = () => navigate(-1)
     const showHeader = useMemo(() => {
         return !HEADER_ESCAPED_LIST.some(route => matchPath(route, pathname))
     },[pathname])
@@ -37,6 +40,7 @@ export const Header = () => {
             paddingX={1}
             width="100%"
             borderBottom={0.8}
+            zIndex={10}
             style={{
                 backgroundColor: "#fff"
             }}
@@ -47,13 +51,17 @@ export const Header = () => {
                 padding={1}
                 justifyContent="flex-start"
             >
-                {project && (
+                {matchPath(ROUTES.HOME, pathname) && project ? 
                     <Chip 
                         color="info"
                         size="small"
                         label={project.name}
                     />
-                )}
+                :
+                    <ArrowBackIosNewIcon 
+                        onClick={goBack}
+                    />
+                }
             </Box>
 
 
@@ -67,7 +75,7 @@ export const Header = () => {
                 <Chip 
                     variant="outlined"
                     size="small"
-                    label={fAddress(account.address)}
+                    label={fAddress(account.address, 12)}
                 />
             </Box>
 

@@ -12,10 +12,19 @@ export const getContracts = async (projectId: string | null):Promise<Contract[]>
     const { contracts } = await contractsBucket.get()
     if(Array.isArray(contracts)){
         return projectId ? 
-            contracts.filter(a => a.projectId === projectId) 
+            contracts.filter(c => c.projectId === projectId) 
             : 
             contracts
     } else {
         return []
+    }
+}
+
+export const getContractById = async (id: string):Promise<Contract | undefined> => {
+    const { contracts } = await contractsBucket.get()
+    if(Array.isArray(contracts)){
+        return contracts.find(c => c.id === id)
+    } else {
+        return undefined
     }
 }

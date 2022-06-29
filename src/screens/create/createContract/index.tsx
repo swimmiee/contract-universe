@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { addAbstract, addContract } from "core";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { SelectProject } from "./SelectProject";
@@ -9,6 +9,7 @@ import { SelectAbstract } from "./SelectAbstract";
 
 type Inputs = {
     name: string
+    abstractId: string
 }
 
 export function CreateContract(){
@@ -18,7 +19,7 @@ export function CreateContract(){
     const [abstractId, setAbstractId] = useState<string | null>(null)
     const [abiText, setAbiText] = useState<string | null>(null)
 
-    const { register, handleSubmit } = useForm<Inputs>();
+    const { register, handleSubmit, setValue } = useForm<Inputs>();
     const onSubmit = async ({name}:Inputs) => {
         // 예외 상황 처리
         if(!projectId){
@@ -47,6 +48,9 @@ export function CreateContract(){
             alert(e.message || "다시 시도해 주세요.")
         }
     }
+
+    const resetAbstractId = useCallback(() => setValue("abstractId", ""),[])
+    const resetAbiText = useCallback(() => setAbiText(null),[])
 
     
     return (
@@ -86,8 +90,10 @@ export function CreateContract(){
             <SelectAbstract 
                 abiText={abiText}
                 setAbiText={setAbiText}
-                abstractId={abstractId}
-                setAbstractId={setAbstractId}
+                resetAbstractId={resetAbstractId}
+                {...register("abstractId", {
+                    onChange: resetAbiText  // abstractId 선택 시 abi.json 파일 삭제
+                })}
             />
             
             <Button type="submit" variant="contained" >

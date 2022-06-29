@@ -8,6 +8,9 @@ const theme = createTheme({
         h4: { fontSize: 24, fontWeight: 'bold' },
         h5: { fontSize: 20, fontWeight: 'bold' },
         h6: { fontSize: 18, fontWeight: 'bold' },
+        button: {
+            textTransform: "none"
+        }
     },
     palette: {
         

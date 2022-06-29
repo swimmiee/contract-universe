@@ -9,3 +9,12 @@ export const getChains = async ():Promise<Chain[]> => {
         return []
     }
 }
+
+export const getChainById = async (id: number):Promise<Chain | undefined> => {
+    const {chains} = await chainsBucket.get()
+    if(Array.isArray(chains)){
+        return chains.find(c => c.chainId === id)
+    } else {
+        return undefined
+    }
+}

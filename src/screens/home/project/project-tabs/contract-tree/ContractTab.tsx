@@ -1,6 +1,7 @@
-import { Chain, Contract, getChains, getImpls, implsBucket } from "core"
+import { useContractState } from "atoms"
+import { Contract, getChains, getImpls } from "core"
 import { useCallback } from "react"
-import { Async, useAsync } from "react-async"
+import { Async } from "react-async"
 import { generatePath, useNavigate } from "react-router-dom"
 import { ROUTES } from "routes"
 import { ContractTreeItem } from "./ContractTreeItem"
@@ -26,7 +27,8 @@ export const ContractTab = ({contract: {id, name, projectId}}:ContractTabProps) 
             impls
         }
     },[id])
-    const {data:chains, error, isPending} = useAsync<Chain[]>(getChains)
+
+    const { setImpl } = useContractState()
 
     return (
         <ContractTreeItem nodeId={id} labelText={name}>
@@ -36,10 +38,11 @@ export const ContractTab = ({contract: {id, name, projectId}}:ContractTabProps) 
                         data.impls.map((impl) => (
                             <ContractTreeItem
                                 nodeId={impl.id}
+                                onClick={() => setImpl(impl)}
                                 labelText={impl.name}
                                 labelInfo={data.chains.find(
                                     c => c.chainId === impl.chainId
-                                )?.name || '-'}
+                                )?.symbol || '-'}
                             />
                         ))
                     )
@@ -47,7 +50,7 @@ export const ContractTab = ({contract: {id, name, projectId}}:ContractTabProps) 
             </Async>
             <ContractTreeItem 
                 nodeId={'create-'+id}
-                labelText="new..."
+                labelText="+ new"
                 onClick={onCreateImpl}
             />
         </ContractTreeItem>

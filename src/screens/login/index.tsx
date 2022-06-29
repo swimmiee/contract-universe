@@ -5,7 +5,6 @@ import { Loading } from "screens/loading"
 import { ROUTES } from "routes"
 import { addAccountToWallet, Account, accountsBucket, isCorrectPassword, getAccount } from "core"
 import { useAsync } from "react-async"
-import { useEffect } from "react"
 
 
 type Inputs = {

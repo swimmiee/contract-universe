@@ -4,8 +4,8 @@ import reset from 'styled-reset';
 const GlobalStyle = createGlobalStyle`
     ${reset}
     body{
-        width: 500px;
-        height: 560px;
+        width: 800px;
+        height: 600px;
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
             'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

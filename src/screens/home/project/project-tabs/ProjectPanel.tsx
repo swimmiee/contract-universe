@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
-import { ContractVerticalTabs } from "../contract-tree";
+import { ContractVerticalTabs } from "./contract-tree";
+import { ImplPanel } from "./impl-panel";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -19,8 +20,11 @@ export function ProjectPanel(props: TabPanelProps) {
             {...other}
         >
         {value === index && (
-            <Box>
+            <Box
+                display="flex"
+            >
                 <ContractVerticalTabs />
+                <ImplPanel />
             </Box>
         )}
         </div>

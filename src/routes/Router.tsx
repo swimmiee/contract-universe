@@ -1,5 +1,5 @@
 import { MemoryRouter, Route, Routes } from "react-router-dom"
-import AddAccount from "screens/addAccount"
+import AddAccount from "screens/create/createAccount"
 import { CreateProject } from "screens/create/createProject"
 import Home from "screens/home"
 import { Header } from "routes/Header"

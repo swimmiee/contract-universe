@@ -30,7 +30,6 @@ export function CreateImplement(){
     });
 
     const onSubmit = async ({name, address, contractId, chainId}:Inputs) => {
-        console.log(name, address, contractId, chainId);
         await addImpl(name, address, contractId, chainId)
         navigate(ROUTES.HOME);
     }
