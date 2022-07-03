@@ -1,7 +1,7 @@
 import { accountState } from "atoms";
 import { Wallet } from "ethers";
 import { useSetRecoilState } from "recoil";
-import { encryptPk } from "utils/encrypt-pk";
+import { encryptPk } from "utils/encryptPk";
 import { accountsBucket } from "./accounts.bucket";
 import { getAccountsList } from "./accounts.info"
 import { AES_ITERATION, web3 } from "./config";

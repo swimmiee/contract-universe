@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { accountsBucket } from "../accounts.bucket"
-import { encryptPk } from "utils/encrypt-pk";
+import { encryptPk } from "utils/encryptPk";
 import { utils } from "aes-js";
 import { AES_ITERATION } from "../config";
 import { CHAINS, chainsBucket } from "core/chain";

@@ -47,7 +47,7 @@ export function ContractVerticalTabs() {
         {({data:constracts, isLoading}) => {
           if(isLoading)
             return "Loading..."
-          else if(constracts)
+          else if(constracts){
             return (
               constracts.map(a => (
                 <ContractTab 
@@ -56,6 +56,7 @@ export function ContractVerticalTabs() {
                 />
               ))
             )
+          }
         }}
       </Async>
       <ContractTreeItem 

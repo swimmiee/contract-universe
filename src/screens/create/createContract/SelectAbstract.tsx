@@ -3,6 +3,7 @@ import { abstractsBucket } from "core"
 import { ChangeEvent, useCallback } from "react"
 import { Async } from "react-async"
 import { UseFormRegisterReturn } from "react-hook-form"
+import { useLoadTextFile } from "utils/loadTextFile"
 
 interface SelectAbstractProps extends UseFormRegisterReturn {
     abiText: string | null
@@ -23,34 +24,20 @@ export const SelectAbstract = ({
 }:SelectAbstractProps) => {
 
     // abi json 파일을 업로드하는 경우
-    const onChangeFile = useCallback((event:ChangeEvent<HTMLInputElement>) => {
-        const reader = new FileReader();
+    const onLoadAbi = useCallback((text: string) => {
+        if(!text)
+            throw Error()
 
-        reader.onload = function() {
-            try {
-                const text = reader.result as string
-                if(!text)
-                    throw Error()
+        const parsed = JSON.parse(text)
+        // 최소한의 체크만! (배열인지만 확인)
+        if(!Array.isArray(parsed))
+            throw Error()
 
-                const parsed = JSON.parse(text)
-                // 최소한의 체크만! (배열인지만 확인)
-                if(!Array.isArray(parsed))
-                    throw Error()
-
-                setAbiText(text)
-                resetAbstractId()
-            } catch(e){
-                console.log(e)
-                alert("올바르지 않은 파일입니다.")
-            }
-        };
-
-        try {
-            reader.readAsText(event.target?.files![0]);
-        } catch(e){
-            console.log('File select canceled');
-        }
+        setAbiText(text)
+        resetAbstractId()
     },[])
+
+    const onChangeFile = useLoadTextFile(onLoadAbi)
 
     const getAbstracts = useCallback(
         async ():Promise<AbstractSelectItem[]> => {

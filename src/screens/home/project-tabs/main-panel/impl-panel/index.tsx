@@ -27,7 +27,10 @@ export const ImplMain = () => {
             flex={1}
             p={1.5}
         >
-            <Box display="flex">
+            <Box 
+                display="flex"
+                alignItems="center"
+            >
                 <TextField 
                     label="Search"
                     value={search}

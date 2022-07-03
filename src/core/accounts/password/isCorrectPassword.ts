@@ -1,4 +1,4 @@
-import { decryptPk } from "utils/decrypt-pk";
+import { decryptPk } from "utils/decryptPk";
 import { accountsBucket } from "../accounts.bucket";
 
 export const isCorrectPassword = async (password:string) => {

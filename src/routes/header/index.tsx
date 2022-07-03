@@ -1,12 +1,12 @@
-import { MenuOutlined } from "@mui/icons-material"
-import { Chip, IconButton, Typography, Box } from "@mui/material"
+import { Chip, Typography, Box } from "@mui/material"
 import { accountState, useContractValue } from "atoms"
 import { useMemo } from "react"
 import { matchPath, useLocation, useNavigate } from "react-router-dom"
 import { useRecoilState } from "recoil"
 import { fAddress } from "utils/formatAddress"
-import { ROUTES } from "./route-names"
+import { ROUTES } from "../route-names"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { Menu } from "./Menu"
 
 
 const HEADER_HEIGHT = 76;
@@ -85,9 +85,7 @@ export const Header = () => {
                 justifyContent="flex-end"
                 style={{width: 100}} 
             >
-                <IconButton>
-                    <MenuOutlined />
-                </IconButton>
+                <Menu />
             </Box>
         </Box>
 

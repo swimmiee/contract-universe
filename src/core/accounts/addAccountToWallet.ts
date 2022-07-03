@@ -1,5 +1,5 @@
 import { Wallet } from "ethers";
-import { decryptPk } from "utils/decrypt-pk";
+import { decryptPk } from "utils/decryptPk";
 import { Account } from "./account.interface";
 import { web3 } from "./config";
 

@@ -2,27 +2,16 @@ import { MemoryRouter, Route, Routes } from "react-router-dom"
 import AddAccount from "screens/create/createAccount"
 import { CreateProject } from "screens/create/createProject"
 import Home from "screens/home"
-import { Header } from "routes/Header"
+import { Header } from "routes/header"
 import { Login } from "screens/login"
 import { Register } from "screens/register"
 import { ROUTES } from "./route-names"
-import styled from "styled-components"
 import { CreateImplement } from "screens/create/createImplement"
 import { CreateContract } from "screens/create/createContract"
+import ImportProject from "screens/importProject"
 
 
 const HEADER_HEIGHT = "78px"
-const Wrapper = styled.div`
-    #header {
-        position: fixed;
-        height: ${HEADER_HEIGHT};
-        z-index: 10;
-    }
-
-    #header_padding {
-        height: ${HEADER_HEIGHT};
-    }
-`
 
 export function Router(){
     return (
@@ -56,6 +45,10 @@ export function Router(){
                 <Route 
                     path={ROUTES.CREATE_IMPLEMENTATION}
                     element={<CreateImplement />}
+                />
+                <Route 
+                    path={ROUTES.IMPORT_PROJECT}
+                    element={<ImportProject />}
                 />
             </Routes>
         </MemoryRouter>
