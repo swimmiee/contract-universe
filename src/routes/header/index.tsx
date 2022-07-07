@@ -53,7 +53,7 @@ export const Header = () => {
             >
                 {matchPath(ROUTES.HOME, pathname) && project ? 
                     <Chip 
-                        color="info"
+                        color="primary"
                         size="small"
                         label={project.name}
                     />

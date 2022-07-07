@@ -3,7 +3,7 @@ import { useContractValue } from "atoms"
 import { exportProject } from "core/projects/exportProject"
 import { useMemo } from "react"
 import { useNavigate } from "react-router-dom"
-import { useLoadTextFile } from "utils/loadTextFile"
+import { ROUTES } from "routes/route-names"
 import { saveAs } from "utils/saveAs"
 
 interface MenuPopupProps {
@@ -21,13 +21,18 @@ interface MenuConfigProps {
 export const MenuPopup = ({open, anchorEl, handleClose}:MenuPopupProps) => {
     const navigate = useNavigate()
 
-    const onChangeFile = useLoadTextFile(onImportProjectFile)
 
     const { project } = useContractValue()
 
     const menuConfig = useMemo(() => {
         const menus:MenuConfigProps[] = [
-            { title: "Import project", onClick: onImportProjectFile }
+            { 
+                title: "Import project", 
+                onClick: () => {
+                    navigate(ROUTES.IMPORT_PROJECT) 
+                    handleClose()
+                }
+            }
         ]
 
         if(project){
@@ -69,17 +74,6 @@ export const MenuPopup = ({open, anchorEl, handleClose}:MenuPopupProps) => {
                     children={title}
                 />
             ))}
-
-            <input
-                accept="json"
-                type="file"
-                hidden
-                onChange={onChangeFile}
-            />
         </Menu>
     )
-}
-
-const onImportProjectFile = () => {
-    
 }

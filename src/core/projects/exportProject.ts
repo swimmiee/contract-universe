@@ -1,22 +1,22 @@
 import { Chain, getProjects } from "core"
 import { Abstract, getAbstract } from "core/abstracts"
-import { getChainById, getChains } from "core/chain"
+import { getChains } from "core/chain"
 import { Contract, getContracts } from "core/contracts"
 import { getImpls, Impl } from "core/implementations"
 import { Project } from "./projects.interfaces"
 
-interface ContractWithPayload extends Contract {
-    abstract: Abstract
+export interface ContractWithPayload extends Contract {
+    abstract: Abstract & {id: string}
     impls: Impl[]
 }
 
-interface ProjectEntity extends Project {
+export interface ProjectEntity extends Project {
     contracts: ContractWithPayload[]
     chains: Chain[]
 }
 
 
-export const exportProject = async (projectId: string) => {
+export const exportProject = async (projectId: string):Promise<ProjectEntity | null> => {
     const chains = await getChains();
     const project = (await getProjects()).find(p => p.id === projectId)
     if(!project)
@@ -42,7 +42,7 @@ export const exportProject = async (projectId: string) => {
 
     const contracts = await getContracts(projectId)
     await Promise.all(
-        contracts.map(async contract => {
+        contracts.map(async (contract) => {
             const abstract = (await getAbstract(contract.abstractId))!;
             const impls = await getImpls(contract.id);
             await Promise.all(
@@ -51,7 +51,7 @@ export const exportProject = async (projectId: string) => {
             exportedProject.contracts.push({
                 ...contract,
                 impls,
-                abstract
+                abstract: { ...abstract, id: contract.abstractId }
             })
         })
     )

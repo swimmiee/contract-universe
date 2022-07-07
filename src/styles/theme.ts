@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { Shadows } from "@mui/material/styles/shadows";
 
 const theme = createTheme({
     typography: {
@@ -9,12 +10,27 @@ const theme = createTheme({
         h5: { fontSize: 20, fontWeight: 'bold' },
         h6: { fontSize: 18, fontWeight: 'bold' },
         button: {
-            textTransform: "none"
+            textTransform: "none",
+            fontWeight: 600
         }
     },
     palette: {
-        
+        primary: {
+            // light?: string;
+            main: "#00F2C3",
+            // dark?: string;
+            contrastText: "#FFFFFF"
+        }
+    },
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                disableElevation: true
+            }
+        }
     }
+    
+    
 });
 
 export default theme
