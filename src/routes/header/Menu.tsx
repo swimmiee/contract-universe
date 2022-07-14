@@ -1,7 +1,7 @@
 import { MenuOutlined } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
-import { MenuPopup } from "./MenuPoppup";
+import { MenuPopup } from "./MenuPopup";
 
 export const Menu = () => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);

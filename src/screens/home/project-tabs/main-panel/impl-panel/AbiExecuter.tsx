@@ -47,9 +47,8 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
                             : 
                             "outlined"
                         }
-                    >
-                        {name}
-                    </Button>
+                        children={name}
+                    />
                 </AccordionSummary>
 
                 <AccordionDetails>

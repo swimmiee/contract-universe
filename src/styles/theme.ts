@@ -24,8 +24,28 @@ const theme = createTheme({
     },
     components: {
         MuiButton: {
-            styleOverrides: {
-                disableElevation: true
+            defaultProps:{
+                // remove button shadow
+                sx(theme) {
+                    return {
+                        boxShadow: 'none',
+                        '&:hover': {
+                            boxShadow: 'none',
+                        '@media (hover: none)': {
+                            boxShadow: 'none',
+                        },
+                        },
+                        '&$focusVisible': {
+                            boxShadow: 'none',
+                        },
+                        '&:active': {
+                            boxShadow: 'none',
+                        },
+                        '&$disabled': {
+                            boxShadow: 'none',
+                        },   
+                    }
+                }
             }
         }
     }

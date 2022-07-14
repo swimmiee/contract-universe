@@ -20,9 +20,7 @@ export function ProjectPanel(props: TabPanelProps) {
             {...other}
         >
         {value === index && (
-            <Box
-                display="flex"
-            >
+            <Box display="flex">
                 <ContractVerticalTabs />
                 <ImplPanel />
             </Box>

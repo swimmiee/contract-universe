@@ -39,14 +39,14 @@ export const ImplListItem = ({impl, chain}:ImplListItemProps) => {
                 </Box>
             </Box>
 
-            <Box display="flex">
+            <Box display="flex" ml={2} >
                 <Button
-                    sx={{mx: 2}}
                     variant="contained"
                     onClick={viewImpl}
                 >
                     View
                 </Button>
+                <span style={{width: 16}} />
                 <Button
                     variant="outlined"
                     onClick={startEdit}

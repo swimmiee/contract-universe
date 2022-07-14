@@ -30,7 +30,6 @@ export const ContractSetting = ({contract}:ContractSettingProps) => {
             flex={1}
             p={2}
         >
-
             <Typography 
                 variant="h3"
                 children={contract.name}

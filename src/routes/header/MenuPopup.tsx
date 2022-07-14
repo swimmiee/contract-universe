@@ -12,9 +12,13 @@ interface MenuPopupProps {
     handleClose: () => void
 }
 
+type onClickReturnType = boolean | void
+type onClickFuncType = () => (onClickReturnType | Promise<onClickReturnType>)
 interface MenuConfigProps {
     title: string
-    onClick: () => void
+    // if return true, remain menu popup
+    onClick: onClickFuncType
+
 }
 
 
@@ -25,16 +29,20 @@ export const MenuPopup = ({open, anchorEl, handleClose}:MenuPopupProps) => {
     const { project } = useContractValue()
 
     const menuConfig = useMemo(() => {
+        // default menu
         const menus:MenuConfigProps[] = [
+            {
+                title: 'Create project',
+                onClick: () => navigate(ROUTES.CREATE_PROJECT)
+            },
             { 
-                title: "Import project", 
-                onClick: () => {
-                    navigate(ROUTES.IMPORT_PROJECT) 
-                    handleClose()
-                }
-            }
+                title: 'Import project', 
+                onClick: () => navigate(ROUTES.IMPORT_PROJECT) 
+            },
+            
         ]
 
+        // add export menu if project exists
         if(project){
             const onExport = () => exportProject(project.id)
                 .then((entity) => {
@@ -47,15 +55,24 @@ export const MenuPopup = ({open, anchorEl, handleClose}:MenuPopupProps) => {
                         ), 
                         entity.name+'.json'
                     )
+                    return false
                 })
-                .catch((e) => alert(e.message))
+                .catch((e) => {
+                    alert(e.message)
+                    return true;    // remain menu popup
+                })
             menus.push({ 
                 title: `Export Project "${project.name}"`, 
                 onClick: onExport
             })
         }
         return menus
-    },[])
+    },[project === null])
+
+    const withClose = (func: onClickFuncType) => () => Promise.resolve(func())
+            .then((remain) => {
+                if(!remain) handleClose()
+            })
 
     return (
         <Menu
@@ -70,7 +87,7 @@ export const MenuPopup = ({open, anchorEl, handleClose}:MenuPopupProps) => {
             {menuConfig.map(({title, onClick}, id) => (
                 <MenuItem 
                     key={id}
-                    onClick={onClick}
+                    onClick={withClose(onClick)}
                     children={title}
                 />
             ))}
