@@ -76,7 +76,7 @@ function ImportProject(){
                     {({data: projects, isResolved}) => {
                         if(isResolved) {
                             projects = projects || []
-                            const isError = projects.map(p => p.name).includes(imported?.name || "")
+                            const isError = projects.map(p => p.name.trim()).includes(imported?.name || "")
                             return (
                             <>
                                 <Typography 
