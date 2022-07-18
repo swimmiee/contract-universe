@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, Divider, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Button, Chip, Divider, Typography } from "@mui/material"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { AbiItem, toBN } from "web3-utils";
 import { useContext, useMemo, useState } from "react";
@@ -94,10 +94,9 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
                             }
                             children={name}
                         />
-                        <Typography
-                            component="code" 
-                            children={stateMutability}
-                            ml={2}
+                        <Chip
+                            label={stateMutability}
+                            sx={{ml: 2}}
                         />
                     </Box>
                 </AccordionSummary>
