@@ -43,7 +43,6 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
         const method = contractInstance.methods[name!](...params)
         if(stateMutability === "view" || stateMutability === "pure"){
             const result = await method.call()
-            console.log(result)
             setResultText(JSON.stringify(result, null, 2))
         }
         else {
@@ -51,9 +50,7 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
                 from: user.address,
                 value
             })
-
             const gasPrice = await web3.eth.getGasPrice()
-            console.log(gasPrice)
 
             const ok = window.confirm(`${
                 web3.utils.fromWei(
@@ -85,15 +82,24 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
                     aria-controls="panel1a-content"
                     expandIcon={<ExpandMoreIcon onClick={toggle} />}
                 >
-                    <Button
-                        type="submit"
-                        variant={stateMutability === "view" ? 
-                            "contained"
-                            : 
-                            "outlined"
-                        }
-                        children={name}
-                    />
+                    <Box
+                        display="flex" 
+                        alignItems="center" 
+                        flexDirection="row"
+                    >
+                        <Button
+                            type="submit"
+                            variant={stateMutability === "view" ? 
+                                "contained" : "outlined"
+                            }
+                            children={name}
+                        />
+                        <Typography
+                            component="code" 
+                            children={stateMutability}
+                            ml={2}
+                        />
+                    </Box>
                 </AccordionSummary>
 
                 <AccordionDetails>
@@ -105,7 +111,7 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
                         />
                     ))}
 
-                    {(stateMutability === "nonpayable" || stateMutability === "payable") && (
+                    {stateMutability === "payable" && (
                         <>
                         <Divider sx={{mb: 1}} />
                         <InputListItem 

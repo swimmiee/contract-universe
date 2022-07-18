@@ -27,7 +27,7 @@ export const ImplListItem = ({impl, chain}:ImplListItemProps) => {
             display="flex"
             alignItems="center"
             justifyContent="space-between"
-            mt={0.5}
+            mt={1}
         >
             <Box>
                 <Typography 

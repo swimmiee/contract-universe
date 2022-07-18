@@ -5,10 +5,10 @@ import { ContractTreeItem } from './ContractTreeItem';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTES } from 'routes';
 import { useContractState } from 'atoms';
-import { Async, useAsync } from 'react-async';
-import { Contract, getContracts } from 'core';
+import { Async } from 'react-async';
+import { getContracts } from 'core';
 import { ContractTab } from './ContractTab';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 const colors = [
   "#1a73e8",
@@ -41,7 +41,7 @@ export function ContractVerticalTabs() {
       defaultExpanded={['3']}
       defaultCollapseIcon={<ArrowDropDownIcon />}
       defaultExpandIcon={<ArrowRightIcon />}
-      sx={{ height: "100%", flexGrow: 1, maxWidth: 160, overflowY: 'auto' }}
+      sx={{ height: "100%", flexGrow: 1, maxWidth: 192, overflowY: 'auto' }}
     >
       <Async promiseFn={loadContracts}>
         {({data:constracts, isLoading}) => {

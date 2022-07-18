@@ -33,6 +33,7 @@ export const ContractSetting = ({contract}:ContractSettingProps) => {
             <Typography 
                 variant="h3"
                 children={contract.name}
+                mb={1.5}
             />
 
             <Async promiseFn={loadImpls}>

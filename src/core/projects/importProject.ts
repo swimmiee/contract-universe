@@ -1,3 +1,4 @@
+import { getProjects } from "core";
 import { abstractsBucket } from "core/abstracts";
 import { addChain, getChains } from "core/chain";
 import { Contract, contractsBucket } from "core/contracts";
@@ -39,6 +40,7 @@ export const importProject = async ({contracts, chains, id:projectId, ...project
         idMap[beforeId] = newId;
         return newId;
     }
+
 
     // 1. add extra chains
     const originChains = await getChains();
@@ -98,4 +100,6 @@ export const importProject = async ({contracts, chains, id:projectId, ...project
         }))
     }
 
+    const projects = await getProjects()
+    return projects.find(p => p.id === newProject.id)!
 }

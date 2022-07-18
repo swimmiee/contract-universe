@@ -63,7 +63,7 @@ export default function AddAccount(){
 
             <Typography 
                 variant="body1"
-                children="비밀 키를 입력해 주세요."
+                children="계정의 비밀 키를 입력해 주세요."
                 mb={2}
             />
             <TextField 

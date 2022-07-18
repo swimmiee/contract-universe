@@ -6,13 +6,15 @@ import { useCallback } from "react";
 import { importProject, isValidProject } from "core/projects/importProject";
 import { ChangeEvent } from "react";
 import { Async } from "react-async";
-import { getProjects } from "core";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes";
+import { useContractState } from "atoms";
+import { getProjects } from "core";
 
 
 function ImportProject(){
     const navigate = useNavigate()
+    const { setProject } = useContractState()
     const [imported, setImported] = useState<ProjectEntity | null>(null)
     const onLoadText = useCallback((text: string) => {
         const tobeImported = JSON.parse(text)
@@ -39,8 +41,10 @@ function ImportProject(){
     const onImport = async () => {
         if(!imported)
             return;
-        await importProject(imported);
-        navigate(ROUTES.HOME);
+        await importProject(imported).then((proj) => {
+            setProject(proj)
+            navigate(ROUTES.HOME);
+        })
     }
 
 
@@ -51,7 +55,7 @@ function ImportProject(){
                     <Typography 
                         variant="h6"
                         children="프로젝트 JSON 파일을 업로드하세요."
-                        mb={2.5}
+                        mb={1.5}
                     />
                     <Button
                         variant="outlined"

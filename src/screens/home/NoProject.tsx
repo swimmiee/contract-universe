@@ -1,5 +1,4 @@
-import { Box, IconButton, Typography } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "routes";
 
@@ -7,20 +6,27 @@ import { ROUTES } from "routes";
 export function NoProject(){
     const navigate = useNavigate()
     const toCreateProject = () => navigate(ROUTES.CREATE_PROJECT)
+    const toImportProject = () => navigate(ROUTES.IMPORT_PROJECT)
     return (
         <Box
             display="flex"
             flexDirection="column"
-            alignItems="center"
             flex={1}
+            px={8}
+            py={6}
         >
             <Typography 
-                variant="body1"
+                variant="h6"
                 children="새로운 프로젝트를 생성해 보세요!"
+                mb={1}
             />
-            <IconButton onClick={toCreateProject}>
-                <Add />
-            </IconButton>
+            <Button variant="contained" onClick={toCreateProject}>
+                New Project
+            </Button>
+            <span style={{padding: 12}} />
+            <Button variant="outlined" onClick={toImportProject}>
+                Import Project
+            </Button>
         </Box>
     )
 }
