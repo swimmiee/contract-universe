@@ -23,7 +23,7 @@ export function NoProject(){
             <Button variant="contained" onClick={toCreateProject}>
                 New Project
             </Button>
-            <span style={{padding: 12}} />
+            <span style={{padding: 8}} />
             <Button variant="outlined" onClick={toImportProject}>
                 Import Project
             </Button>

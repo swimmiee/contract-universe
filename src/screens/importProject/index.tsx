@@ -49,7 +49,7 @@ function ImportProject(){
 
 
     return (
-        <Box p={5}>
+        <Box p={4}>
             {!imported ? (
                 <>
                     <Typography 
@@ -61,7 +61,6 @@ function ImportProject(){
                         variant="outlined"
                         component="label"
                         fullWidth
-                        sx={{mt: 2}}
                     >
                         파일 업로드
                         <input
@@ -116,6 +115,7 @@ function ImportProject(){
 
                                     <Button
                                         variant="contained"
+                                        component="label"
                                         sx={{
                                             display: "flex",
                                             flex: 2.5,

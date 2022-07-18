@@ -6,7 +6,7 @@ import { Async } from "react-async";
 import { ContractSetting } from "./contract-setting-panel";
 import ImplStore from "./impl-panel/implContext";
 import { ImplMain } from "./impl-panel";
-import { NoImpl } from "./NoImpl";
+import { NotSelected } from "./NotSelected";
 
 export function ImplPanel (){
     const { impl, contract } = useContractState()
@@ -29,12 +29,10 @@ export function ImplPanel (){
                 {({data, isLoading, error}) => {
                     if(error){
                         if(contract) return (
-                            <ContractSetting 
-                                contract={contract} 
-                            />
+                            <ContractSetting />
                         )
                         else return (
-                            <NoImpl />
+                            <NotSelected />
                         )
                     } 
                     else if(data) return (

@@ -40,35 +40,39 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
         if(!shouldExecute || !user) 
             return;
 
-        const method = contractInstance.methods[name!](...params)
-        if(stateMutability === "view" || stateMutability === "pure"){
-            const result = await method.call()
-            setResultText(JSON.stringify(result, null, 2))
+        try {
+            const method = contractInstance.methods[name!](...params)
+            if(stateMutability === "view" || stateMutability === "pure"){
+                const result = await method.call()
+                setResultText(JSON.stringify(result, null, 2))
+            }
+            else {
+                const gas = await method.estimateGas({
+                    from: user.address,
+                    value
+                })
+                const gasPrice = await web3.eth.getGasPrice()
+    
+                const ok = window.confirm(`${
+                    web3.utils.fromWei(
+                        toBN(gas).mul(toBN(gasPrice)), "ether"
+                    )
+                }${chain.symbol} of Gas will be used. Proceed?`)
+    
+                if(!ok)
+                    return;
+                
+                const receipt:TransactionReceipt = await method.send({
+                    from: user.address,
+                    gas,
+                    gasPrice,
+                    value
+                })
+                setResultText("[Tx Hash]\n" + receipt.transactionHash)
+            }
+        } catch (e) {
+            alert("컨트랙트 함수 실행에 실패했습니다.")
         }
-        else {
-            const gas = await method.estimateGas({
-                from: user.address,
-                value
-            })
-            const gasPrice = await web3.eth.getGasPrice()
-
-            const ok = window.confirm(`${
-                web3.utils.fromWei(
-                    toBN(gas).mul(toBN(gasPrice)), "ether"
-                )
-            }${chain.symbol} of Gas will be used. Proceed?`)
-
-            if(!ok)
-                return;
-            
-            const receipt:TransactionReceipt = await method.send({
-                from: user.address,
-                gas,
-                gasPrice,
-                value
-            })
-            setResultText("[Tx Hash]\n" + receipt.transactionHash)
-        }   
 
     }
 

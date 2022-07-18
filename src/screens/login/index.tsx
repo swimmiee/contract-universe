@@ -46,7 +46,7 @@ export function Login(){
             <Typography 
                 variant="h6"
                 children="Contract Universe에 로그인하세요."
-                mb={1}
+                mb={3}
             />
             <TextField 
                 label="비밀번호"
