@@ -104,11 +104,16 @@ export const AbiExecuter = ({abi:{name, inputs, stateMutability}}:AbiExecuterPro
                             key={input.name+'-'+i}
                         />
                     ))}
-                    <Divider />
-                    <InputListItem 
-                        input={{name: 'value', type: ''}}
-                        control={control}
-                    />
+
+                    {(stateMutability === "nonpayable" || stateMutability === "payable") && (
+                        <>
+                        <Divider sx={{mb: 1}} />
+                        <InputListItem 
+                            input={{name: 'value', type: ''}}
+                            control={control}
+                        />
+                        </>
+                    )}
 
                     <Box display="flex" flexDirection="column" mt={2}>
                         <Typography
