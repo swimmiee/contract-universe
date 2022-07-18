@@ -1,5 +1,5 @@
 # Contract Universe
-Chrome extension for easy contract call
+Chrome extension for easy contract call & transaction
 
 
 # Installation
