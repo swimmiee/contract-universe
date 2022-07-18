@@ -3,14 +3,16 @@ import { Control, Controller } from "react-hook-form";
 import { AbiInput } from "web3-utils";
 
 interface InputListItemProps {
-    input: AbiInput;
+    input: AbiInput | {name: string, type?: string}
     control: Control
 }
 
 export const InputListItem = ({input:{name, type}, control}:InputListItemProps) => {
     return (
         <Box display="flex" flexDirection="row" alignItems="center" p={.5}>
-            <code>{type}</code>
+            {type && (
+                <code>{type}</code>
+            )}
 
             <Typography 
                 display="flex"

@@ -19,8 +19,7 @@ const GlobalStyle = createGlobalStyle`
         }
     }
     body, html {
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow: scroll;
         white-space: nowrap;
     }
     

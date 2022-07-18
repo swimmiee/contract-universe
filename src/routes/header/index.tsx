@@ -3,7 +3,6 @@ import { accountState, useContractValue } from "atoms"
 import { useMemo } from "react"
 import { matchPath, useLocation, useNavigate } from "react-router-dom"
 import { useRecoilState } from "recoil"
-import { fAddress } from "utils/formatAddress"
 import { ROUTES } from "../route-names"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Menu } from "./Menu"
@@ -75,7 +74,7 @@ export const Header = () => {
                 <Chip 
                     variant="outlined"
                     size="small"
-                    label={fAddress(account.address, 12)}
+                    label={account.address}
                 />
             </Box>
 
