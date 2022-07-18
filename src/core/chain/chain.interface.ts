@@ -3,6 +3,7 @@ export interface Chain {
     rpc_url: string
     name: string
     symbol: string
+    explorer?: string
 }
 
 export interface ChainsBucket {
