@@ -14,15 +14,18 @@ function a11yProps(index: number) {
 
 export default function ProjectTabs() {
     const [current, setCurrent] = useState(0);
-    const { setProject } = useContractState()
+    const { setProject, setContract } = useContractState()
     const {data: projects} = useAsync({
         promiseFn: getProjects
     })
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setCurrent(newValue);
-        if(projects)
+        if(projects){
             setProject(projects[newValue])
+            if(newValue !== current)
+                setContract(null)
+        }
     };
 
     return projects ? (

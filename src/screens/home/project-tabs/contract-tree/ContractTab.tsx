@@ -31,7 +31,10 @@ export const ContractTab = ({contract}:ContractTabProps) => {
     },[id])
 
     const { setContract, setImpl } = useContractState()
-    const selectContract = useCallback(() => setContract(contract),[contract.id])
+    const selectContract = useCallback(() => {
+        setContract(contract)
+        setImpl(null)
+    },[contract.id])
 
     return (
         <ContractTreeItem 

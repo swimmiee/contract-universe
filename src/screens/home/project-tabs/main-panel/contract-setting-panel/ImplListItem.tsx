@@ -1,7 +1,8 @@
 import { Box, Button, Typography } from "@mui/material"
 import { useContractState } from "atoms"
-import { Chain, Impl } from "core"
-import { useState } from "react"
+import { Chain, Impl, removeImpl } from "core"
+import { useCallback, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { fAddress } from "utils/formatAddress"
 
 interface ImplListItemProps {
@@ -9,10 +10,17 @@ interface ImplListItemProps {
     chain: Chain
 }
 export const ImplListItem = ({impl, chain}:ImplListItemProps) => {
-    const {setImpl} = useContractState()
+    const { setImpl } = useContractState()
     const viewImpl = () => setImpl(impl)
-    const [isEditing, setIsEditing] = useState(false);
-    const startEdit = () => setIsEditing(true)
+    const navigate = useNavigate()
+    // const [isEditing, setIsEditing] = useState(false);
+    // const startEdit = () => setIsEditing(true)
+    const onRemove = useCallback(() => {
+        if(window.confirm("정말 삭제하시겠습니까?")){
+            removeImpl(impl.id)
+                .then(() => navigate(0))
+        }
+    },[])
 
     return (
         <Box
@@ -49,9 +57,10 @@ export const ImplListItem = ({impl, chain}:ImplListItemProps) => {
                 <span style={{width: 16}} />
                 <Button
                     variant="outlined"
-                    onClick={startEdit}
+                    color="error"
+                    onClick={onRemove}
                 >
-                    Edit
+                    Remove
                 </Button>
             </Box>
         </Box>
