@@ -8,5 +8,5 @@ or,
 ```
 git clone https://github.com/swimmiee/contract-universe
 npm i
-npm run zip
+npm run build
 ```

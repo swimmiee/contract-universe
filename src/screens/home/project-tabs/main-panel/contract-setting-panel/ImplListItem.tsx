@@ -40,9 +40,9 @@ export const ImplListItem = ({impl, chain}:ImplListItemProps) => {
                         children={chain.name}
                     />
                     <Typography 
-                        ml={1.5}
+                        ml={1}
                         variant="caption"
-                        children={fAddress(impl.address, 12, 4)}
+                        children={impl.address}
                     />
                 </Box>
             </Box>
